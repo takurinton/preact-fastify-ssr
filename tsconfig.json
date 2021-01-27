@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "jsxFactory": "h",
+      "target": "es5",
+      "module": "commonjs",
+      "jsx": "react",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+    }, 
+    "include": [
+      "next-env.d.ts",
+      "**/*.ts",
+      "**/*.tsx",
+      "next.config.js"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+}

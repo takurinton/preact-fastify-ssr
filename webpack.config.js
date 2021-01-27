@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   target: 'web', 
   entry: './src/client/index.tsx', 
   output: {
@@ -22,7 +22,6 @@ module.exports = {
         test: /\.ts(x?)$/,
         use: [
           "babel-loader",
-          "linaria/loader",
           {
             loader: "ts-loader",
             options: {

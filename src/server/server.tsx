@@ -5,8 +5,9 @@ const path = require('path');
 
 import { Html } from './Html';
 import { Home } from '../client/components/pages/Home';
-import render from "preact-render-to-string";
 import { About } from '../client/components/pages/About';
+
+import render from "preact-render-to-string";
 
 const app = fastify();
 app.register(fastifyStatic, {
@@ -22,8 +23,8 @@ app.get('/', (req: FastifyRequest, res: FastifyReply) => {
         props: {},
     });
     const html = render(renderd)
+    // res.raw.write('<!DOCTYPE html>')
     res.type('text/html')
-    res.raw.write('<!DOCTYPE html>')
     res.send(html)
 });
 
@@ -36,8 +37,8 @@ app.get('/about', (req: FastifyRequest, res: FastifyReply) => {
         props: {},
     });
     const html = render(renderd)
+    // res.raw.write('<!DOCTYPE html>')
     res.type('text/html')
-    res.raw.write('<!DOCTYPE html>')
     res.send(html)
 });
 

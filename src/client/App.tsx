@@ -1,12 +1,4 @@
-import { h } from 'preact';
-import { Router, Route } from "preact-router"
+import { h, render } from "preact"
+import { Router } from './Router'
 
-import { Home } from './components/pages/Home'
-import { About } from './components/pages/About'
-
-export const App = () => (
-  <Router>
-    <Route path='/' component={Home} />
-    <Route path='/about' component={About} />
-  </Router>
-)
+render(<Router />, document.body)

@@ -6,8 +6,13 @@ const path = require('path');
 import { Html } from './Html';
 import { Home } from '../client/components/pages/Home';
 import { About } from '../client/components/pages/About';
+import { Posts } from '../client/components/pages/Posts';
+import { Post } from '../client/components/pages/Post'
 
 import render from "preact-render-to-string";
+
+import fetch from 'node-fetch';
+
 
 const app = fastify();
 app.register(fastifyStatic, {
@@ -40,6 +45,52 @@ app.get('/about', (req: FastifyRequest, res: FastifyReply) => {
     // res.raw.write('<!DOCTYPE html>')
     res.type('text/html')
     res.send(html)
+});
+
+app.get('/posts', (req: FastifyRequest, res: FastifyReply) => {
+    const id: string = (req.params as { id: string }).id;
+    fetch(`https://api.takurinton.com/blog/v1/`)
+    .then(res => res.json())
+    .then(json => {
+        const renderd = Html({
+            children: Posts,
+            title: 'blog posts',
+            discription: 'blog posts', 
+            image: 'https://www.takurinton.com/me.jpeg', 
+            props: json,
+        });
+        const html = render(renderd)
+        // res.raw.write('<!DOCTYPE html>')
+        res.type('text/html')
+        res.send(html)
+    })
+    .catch(err => {
+        res.type('text/html')
+        res.send(err)
+    });
+});
+
+app.get('/post/:id', (req: FastifyRequest, res: FastifyReply) => {
+    const id: string = (req.params as { id: string }).id;
+    fetch(`https://api.takurinton.com/blog/v1/post/${id}`)
+    .then(res => res.json())
+    .then(json => {
+        const renderd = Html({
+            children: Post,
+            title: json.title,
+            discription: json.title, 
+            image: 'https://www.takurinton.com/me.jpeg', 
+            props: json,
+        });
+        const html = render(renderd)
+        // res.raw.write('<!DOCTYPE html>')
+        res.type('text/html')
+        res.send(html)
+    })
+    .catch(() => {
+        res.type('text/html')
+        res.send('error')
+    });
 });
 
 app.listen(3000);

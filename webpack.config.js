@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'production',
   target: 'web', 
-  entry: './src/client/index.tsx', 
+  entry: './src/client/app.tsx', 
   output: {
     path: path.resolve(__dirname, 'assets'),
     filename: '[name].js'

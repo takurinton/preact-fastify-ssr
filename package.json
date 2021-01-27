@@ -28,6 +28,7 @@
     "@babel/preset-typescript": "^7.12.7",
     "fastify": "^3.11.0",
     "fastify-static": "^3.4.0",
+    "node-fetch": "^2.6.1",
     "preact": "^10.5.7",
     "preact-compat": "^3.19.0",
     "preact-render-to-string": "^5.1.12",

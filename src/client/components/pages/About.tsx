@@ -6,7 +6,7 @@ export const About = () => {
     const [count, setCount] = useState(0);
     return (
         <div>
-            this page is home <br/>
+            <h1>hello about</h1>
             <a href="/">home</a>
             <br/>
             <h1>{ count }</h1>

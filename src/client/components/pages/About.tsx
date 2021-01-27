@@ -7,7 +7,7 @@ export const About = () => {
     return (
         <div>
             <h1>hello about</h1>
-            <a href="/">home</a>
+            <h2><a href="/">home</a></h2>
             <br/>
             <h1>{ count }</h1>
             <button onClick={() => setCount(count+1)}>click me!</button>

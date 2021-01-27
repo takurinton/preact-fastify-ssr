@@ -1,5 +1,4 @@
-// import fastify, { FastifyRequest, FastifyReply } from "fastify";
-import express, { Express } from 'express';
+import fastify, { FastifyRequest, FastifyReply } from "fastify";
 
 const fastifyStatic = require('fastify-static');
 const path = require('path');
@@ -9,15 +8,12 @@ import { Home } from '../client/components/pages/Home';
 import render from "preact-render-to-string";
 import { About } from '../client/components/pages/About';
 
-// const app = fastify();
-// app.register(fastifyStatic, {
-//     root: path.join(process.cwd(), 'assets')
-// })
+const app = fastify();
+app.register(fastifyStatic, {
+    root: path.join(process.cwd(), 'assets')
+})
 
-const app = express();
-app.use(express.static('assets'));
-
-app.get('/', (req: Express.Request, res: Express.Response) => {
+app.get('/', (req: FastifyRequest, res: FastifyReply) => {
     const renderd = Html({
         children: Home,
         title: 'home',
@@ -26,10 +22,12 @@ app.get('/', (req: Express.Request, res: Express.Response) => {
         props: {},
     });
     const html = render(renderd)
+    res.type('text/html')
+    res.raw.write('<!DOCTYPE html>')
     res.send(html)
 });
 
-app.get('/about', (req: Express.Request, res: Express.Response) => {
+app.get('/about', (req: FastifyRequest, res: FastifyReply) => {
     const renderd = Html({
         children: About,
         title: 'about',
@@ -38,6 +36,8 @@ app.get('/about', (req: Express.Request, res: Express.Response) => {
         props: {},
     });
     const html = render(renderd)
+    res.type('text/html')
+    res.raw.write('<!DOCTYPE html>')
     res.send(html)
 });
 

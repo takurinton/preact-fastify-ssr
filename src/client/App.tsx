@@ -1,4 +1,5 @@
-import { h, render } from "preact"
+import { h, hydrate } from "preact"
 import { Router } from './Router'
 
-render(<Router />, document.body)
+const root = document.getElementById('main');
+hydrate(<Router />, root)

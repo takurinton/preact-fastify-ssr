@@ -47,6 +47,10 @@ app.get('/about', (req: FastifyRequest, res: FastifyReply) => {
     res.send(html)
 });
 
+app.get('/prefetch/about', (req: FastifyRequest, res: FastifyReply) => {
+    res.send({});
+});
+
 app.get('/posts', (req: FastifyRequest, res: FastifyReply) => {
     const id: string = (req.params as { id: string }).id;
     fetch(`https://api.takurinton.com/blog/v1/`)
@@ -70,6 +74,17 @@ app.get('/posts', (req: FastifyRequest, res: FastifyReply) => {
     });
 });
 
+app.get('/prefetch/posts', (req: FastifyRequest, res: FastifyReply) => {
+    fetch(`https://api.takurinton.com/blog/v1/`)
+    .then(res => res.json())
+    .then(json => {
+        res.send(json);
+    })
+    .catch(() => {
+        res.send({status: 500})
+    })
+});
+
 app.get('/post/:id', (req: FastifyRequest, res: FastifyReply) => {
     const id: string = (req.params as { id: string }).id;
     fetch(`https://api.takurinton.com/blog/v1/post/${id}`)
@@ -91,6 +106,18 @@ app.get('/post/:id', (req: FastifyRequest, res: FastifyReply) => {
         res.type('text/html')
         res.send('error')
     });
+});
+
+app.get('/prefetch/post/:id', (req: FastifyRequest, res: FastifyReply) => {
+    const id: string = (req.params as { id: string }).id;
+    fetch(`https://api.takurinton.com/blog/v1/post/${id}`)
+    .then(res => res.json())
+    .then(json => {
+        res.send(json);
+    })
+    .catch(() => {
+        res.send({status: 500})
+    })
 });
 
 app.listen(3000);

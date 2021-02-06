@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h, render } from 'preact';
 
 import { Home } from './components/pages/Home'
 import { About } from './components/pages/About'
@@ -25,3 +25,29 @@ export const Router = () => {
 
   return <Component />
 }
+
+// export const Router = () => {
+//   if (window.location.pathname === '/') {
+//     render(<Home />, document.getElementById('main'));
+//     const about = document.getElementById('about');
+//     about?.addEventListener('click', e => {
+//       e.preventDefault();
+//       window.history.pushState({}, 'about', '/about');
+//       fetch('/about')
+//       .then(() => {
+//         render(<About />, document.getElementById('main'))
+//       })
+//     })
+
+//     const posts = document.getElementById('posts');
+//     posts?.addEventListener('click', e => {
+//       e.preventDefault();
+//       window.history.pushState({}, 'posts', '/posts');
+//       fetch('https://api.takurinton.com/blog/v1/')
+//       .then(res => res.json())
+//       .then(json => {
+//         render(<Posts {...json} />, document.getElementById('main'))
+//       })
+//     })
+//   }
+// }

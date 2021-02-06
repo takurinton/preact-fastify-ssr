@@ -26,6 +26,7 @@ export const Posts = (props: PostsProps) => {
     return (
         <div>
             <h1>Blog Posts</h1>
+            <h2><a href="/">home</a></h2>
             {
                 props.results.map(post => ( <p><a href={`/post/${post.id}`}>{post.title}</a></p> ) )
             }

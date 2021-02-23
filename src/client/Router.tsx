@@ -1,27 +1,25 @@
-import { h } from 'preact';
+import { h, JSX } from 'preact';
+import { Router, Route } from './router/index';
+import { Link } from './router/prefetch';
 
 import { Home } from './components/pages/Home'
 import { About } from './components/pages/About'
 import { Post } from './components/pages/Post';
 import { Posts } from './components/pages/Posts';
 
-export const Router = () => {
-  const Component = () => {
-    const path = window.location.pathname.split('/')[1]; // 苦しい
-    const json = JSON.parse(document.getElementById('json').getAttribute('data-json'));
-    switch(path) {
-      case '':
-        return <Home />;
-      case 'about':
-        return <About />
-      case 'posts':
-        return <Posts {...json} />;
-      case 'post':
-        return <Post {...json} />;
-      default:
-        return <h1>page not found</h1>;
-    }
-  }
-
-  return <Component />
+export const R = (): JSX.Element => {
+  const json = JSON.parse(document.getElementById('json').getAttribute('data-json'));
+  return (
+    <div>
+      <Link href="/"><h3>Home</h3></Link>
+      <Link href="/about"><h3>About</h3></Link>
+      <Link href="/posts"><h3>blog</h3></Link>
+      <Router>
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/posts" component={() => <Posts {...json} />} />
+        <Route path="/post/:id" component={() => <Post {...json} />} />
+      </Router>
+    </div>
+  )
 }

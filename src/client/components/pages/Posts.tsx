@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { Link } from 'preact-router';
 /** @jsx h */
 
 interface PostsProps {
@@ -27,7 +28,7 @@ export const Posts = (props: PostsProps) => {
         <div>
             <h1>Blog Posts</h1>
             {
-                props.results.map(post => ( <p><a href={`/post/${post.id}`}>{post.title}</a></p> ) )
+                props.results.map(post => ( <p><Link href={`/post/${post.id}`}>{post.title}</Link></p> ) )
             }
         </div>
     )
